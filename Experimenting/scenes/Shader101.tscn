@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dogded3rpih6o"]
+
+[ext_resource type="Texture2D" uid="uid://trh76tlbfnum" path="res://icon.svg" id="1_56kfe"]
+[ext_resource type="Shader" path="res://Shaders/Shader1.gdshader" id="1_fvq7v"]
+[ext_resource type="Script" path="res://scenes/Sprite2D.gd" id="3_0meuh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jcxdx"]
+shader = ExtResource("1_fvq7v")
+shader_parameter/intensity = 2.973
+shader_parameter/speed = 6.0
+shader_parameter/EPIC_Color = Color(0.960784, 0.290196, 0.870588, 0.815686)
+
+[node name="Shader101" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jcxdx")
+position = Vector2(665, 447)
+scale = Vector2(1.14063, 1)
+texture = ExtResource("1_56kfe")
+script = ExtResource("3_0meuh")

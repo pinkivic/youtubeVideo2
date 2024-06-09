@@ -1,0 +1,45 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://5shmtw42t3pc"
+path="res://.godot/imported/Bot.gltf-8438c0213c041c5fcd2234d2d30bf2e9.scn"
+
+[deps]
+
+source_file="res://Bot.gltf"
+dest_files=["res://.godot/imported/Bot.gltf-8438c0213c041c5fcd2234d2d30bf2e9.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"Alpha_Body_MAT": {
+"use_external/enabled": true,
+"use_external/path": "res://Bot/Alpha_Body_MAT.tres"
+},
+"Alpha_Joints_MAT": {
+"use_external/enabled": true,
+"use_external/path": "res://Bot/Alpha_Joints_MAT.tres"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

@@ -1,0 +1,55 @@
+Hi, my name is victor! and today I'm gonna show you how I made this shader in godot:
+
+
+
+so it all started a few month ago when I stumbled upon this video, I immediately fell in love with the effect and I looked if there was a tutorial or a link to something but even on ht e guys twiter page there was not that much info.
+
+and i was not the only one interrested ( show screenshot )
+
+So I decided to make a shader a bit similar!
+
+so first off what were the problem with this shader?
+
+well from the information I could gather, he used different buffers for his character and the rest of his world.
+This is a problem because as he does not apply the same frame rate between those buffer, the characters will be lagging behind if you start  rotating the camera.
+
+if you were turning your screen really fast, you would still be able to see characters even if you are not looking at them.
+
+
+so the first step is to make a post process effect.
+
+creating post process in godot is a bit weird and it works differently depending on  the version you are using, but don't worry, you can find a very detailed explanation on how to do it in the godot documentation 
+(link in the description)
+In Godot 4.2, you need to create a quad, attach it to your camera, flip the...,
+and set ... . 
+Then you can start programming your shader!
+
+The fragment fonction will be called for each pixel on our screen.
+so if you have a screen of 1920 by 1080, this function will be called 2,073,600 times on your gpu.
+
+in godot post processing you have access to 3 textures, 
+the ... ... ...
+
+
+using the depth texture we can look at the pixels surounding our pixel and figure out if we are in a zone of low contrast or high constrat  in other word an edge!
+
+we can get an even better outline if we also use  the normal!
+
+then we mix our lines with the original texture and voila!
+
+now we need to take care of the lower frame rate and the deformation of the mesh.
+
+//Modify base on footage//for this I created a new material shader that is intended to be applied on all your characters or movable elements.
+
+
+to modify the geometry of an element you need to use the vertex function. this one is called for each vertex of your model.
+
+then we can use cos function to modify the shape of the object.
+
+
+
+
+
+
+
+

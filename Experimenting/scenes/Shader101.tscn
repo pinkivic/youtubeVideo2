@@ -1,14 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://dogded3rpih6o"]
+[gd_scene load_steps=5 format=3 uid="uid://nwr5eu1vneui"]
 
 [ext_resource type="Texture2D" uid="uid://trh76tlbfnum" path="res://icon.svg" id="1_56kfe"]
-[ext_resource type="Shader" path="res://Shaders/Shader1.gdshader" id="1_fvq7v"]
-[ext_resource type="Script" path="res://scenes/Sprite2D.gd" id="3_0meuh"]
+
+[sub_resource type="Shader" id="Shader_h80m0"]
+code = "shader_type canvas_item;
+
+group_uniforms UsefullStuff;
+uniform float intensity: hint_range(0.0, 10) = 1.0;
+uniform float speed = 1.0;
+group_uniforms;
+
+group_uniforms PointlessStuff;
+uniform vec4 EPIC_Color: source_color; 
+group_uniforms;
+
+void vertex() 
+{
+	float wave1 = (sin(TIME*2.3 * speed) * 5.0 + sin(TIME * 3.3 * speed) * 8.0)  * ( 0.8 - UV.y);
+	float wave2 = (sin(TIME*1.8 * speed) * 5.0 + sin(TIME * 2.3 * speed) * 8.0)  * ( 0.8 - UV.y) * (1.0 - UV.y * 2.0);
+	float wave3 = 0.0;
+	VERTEX += vec2(wave1 * intensity, wave2  * intensity) ;
+	
+	vec4 vertex_color1 = vec4(UV.xyx,1.0);
+	vec4 vertex_color2 = vec4(UV.yxx,1.0);
+	
+	COLOR = mix(vertex_color1, vertex_color2, (sin(TIME * speed)+ 1.0)*0.5);
+}
+
+void fragment() {
+	
+	
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jcxdx"]
-shader = ExtResource("1_fvq7v")
+shader = SubResource("Shader_h80m0")
 shader_parameter/intensity = 2.973
 shader_parameter/speed = 6.0
 shader_parameter/EPIC_Color = Color(0.960784, 0.290196, 0.870588, 0.815686)
+
+[sub_resource type="GDScript" id="GDScript_ndrk7"]
+script/source = "extends Sprite2D
+
+var speed = 1.0;
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_just_pressed(\"set_speed\"):
+		speed += 0.2
+		material.set_shader_parameter(\"speed\", speed)
+"
 
 [node name="Shader101" type="Node2D"]
 
@@ -17,4 +67,4 @@ material = SubResource("ShaderMaterial_jcxdx")
 position = Vector2(665, 447)
 scale = Vector2(1.14063, 1)
 texture = ExtResource("1_56kfe")
-script = ExtResource("3_0meuh")
+script = SubResource("GDScript_ndrk7")

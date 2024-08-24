@@ -1,0 +1,102 @@
+[gd_scene load_steps=14 format=3 uid="uid://dosjeqdjv230m"]
+
+[ext_resource type="PackedScene" uid="uid://5shmtw42t3pc" path="res://Bot.gltf" id="1_d38mo"]
+[ext_resource type="Texture2D" uid="uid://c8arnlq67qi7" path="res://asset/textures/grids/Dark/texture_05.png" id="2_32axf"]
+[ext_resource type="Texture2D" uid="uid://b58xv1joypxo5" path="res://asset/textures/grids/Orange/texture_09.png" id="3_wddmb"]
+[ext_resource type="Texture2D" uid="uid://cm5m7nr7dugjd" path="res://asset/textures/grids/Purple/texture_09.png" id="4_ixbnd"]
+[ext_resource type="Texture2D" uid="uid://dyshw81wmob45" path="res://asset/textures/grids/Green/texture_10.png" id="5_7m5ef"]
+[ext_resource type="PackedScene" uid="uid://2vipq16e6h77" path="res://scenes/player.tscn" id="6_qbxuk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8lbx0"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fieel"]
+sky_material = SubResource("ProceduralSkyMaterial_8lbx0")
+
+[sub_resource type="Environment" id="Environment_8t2v5"]
+background_mode = 2
+sky = SubResource("Sky_fieel")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.658824, 0.682353, 0.686275, 1)
+fog_density = 0.001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqucg"]
+albedo_texture = ExtResource("2_32axf")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvmid"]
+albedo_texture = ExtResource("3_wddmb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5070c"]
+albedo_texture = ExtResource("4_ixbnd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_el601"]
+albedo_texture = ExtResource("5_7m5ef")
+uv1_triplanar = true
+
+[node name="world" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.258823, 0.836517, -0.48296, -4.27073e-08, 0.499998, 0.866027, 0.965925, 0.224147, -0.129411, -10, 8, -4)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8t2v5")
+
+[node name="AuxScene" parent="." instance=ExtResource("1_d38mo")]
+visible = false
+
+[node name="map" type="Node3D" parent="."]
+
+[node name="floor" type="CSGBox3D" parent="map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_fqucg")
+use_collision = true
+size = Vector3(1000, 1, 1000)
+
+[node name="box" type="CSGBox3D" parent="map"]
+transform = Transform3D(0.520369, 0, 0.853942, 0, 1, 0, -0.853942, 0, 0.520369, -2.0872, 0, 6.70164)
+material_override = SubResource("StandardMaterial3D_pvmid")
+use_collision = true
+
+[node name="box2" type="CSGBox3D" parent="map"]
+transform = Transform3D(1.96194, 0, 0.388332, 0, 2, 0, -0.388332, 0, 1.96194, -7.27576, 0.490669, 1.98596)
+material_override = SubResource("StandardMaterial3D_5070c")
+use_collision = true
+
+[node name="ramp" type="CSGBox3D" parent="map"]
+transform = Transform3D(2, 0, 0, 0, 1.92474, -0.543486, 0, 0.543486, 1.92474, 0, -0.00532021, -2.44069)
+material_override = SubResource("StandardMaterial3D_el601")
+use_collision = true
+size = Vector3(1, 0.210449, 2.71997)
+
+[node name="ramp2" type="CSGBox3D" parent="map"]
+transform = Transform3D(-2, 4.7513e-08, 1.68266e-07, -4.52534e-08, 1.71849, -1.02313, -1.68888e-07, -1.02313, -1.71849, -0.224831, -0.119806, 10.2547)
+material_override = SubResource("StandardMaterial3D_el601")
+use_collision = true
+size = Vector3(1, 0.210449, 2.71997)
+metadata/_edit_group_ = true
+
+[node name="ramp3" type="CSGBox3D" parent="map"]
+transform = Transform3D(-1.41421, -0.499612, -1.32302, -1.49956e-08, 1.87104, -0.706558, 1.41421, -0.499612, -1.32302, 4.77517, -0.119806, 9.25468)
+material_override = SubResource("StandardMaterial3D_el601")
+use_collision = true
+size = Vector3(1, 0.210449, 2.71997)
+
+[node name="Player" parent="." instance=ExtResource("6_qbxuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6, 3, 5)
+light_energy = 10.957
+spot_range = 5.847
+spot_angle = 31.6912
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 8)
+light_energy = 10.957
+spot_range = 5.847
+spot_angle = 31.6912

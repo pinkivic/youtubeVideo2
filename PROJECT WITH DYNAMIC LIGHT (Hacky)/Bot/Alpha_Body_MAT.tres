@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://w31si728445i"]
+
+[resource]
+resource_name = "Alpha_Body_MAT"
+albedo_color = Color(0.843137, 0.839216, 0.768627, 1)
